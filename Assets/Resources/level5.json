@@ -1,0 +1,32 @@
+{
+  "id": 5,
+  "gridData": [
+    { "id": 2, "tileID": 1, "contentID": -1 },
+    { "id": 3, "tileID": 1, "contentID": -1 },
+    { "id": 6, "tileID": 1, "contentID": -1 },
+    { "id": 7, "tileID": 1, "contentID": -1 },
+    { "id": 8, "tileID": 1, "contentID": -1 },
+    { "id": 9, "tileID": 1, "contentID": -1 },
+    { "id": 10, "tileID": 1, "contentID": -1 },
+    { "id": 12, "tileID": 1, "contentID": -1 },
+    { "id": 13, "tileID": 1, "contentID": -1 },
+    { "id": 15, "tileID": 3, "contentID": -1 },
+    { "id": 16, "tileID": 1, "contentID": 0 },
+    { "id": 18, "tileID": 1, "contentID": -1 },
+    { "id": 19, "tileID": 1, "contentID": -1 },
+    { "id": 20, "tileID": 1, "contentID": -1 },
+    { "id": 21, "tileID": 1, "contentID": -1 },
+    { "id": 22, "tileID": 1, "contentID": -1 },
+    { "id": 23, "tileID": 1, "contentID": -1 },
+    { "id": 24, "tileID": 1, "contentID": -1 },
+    { "id": 25, "tileID": 1, "contentID": -1 },
+    { "id": 28, "tileID": 1, "contentID": -1 },
+    { "id": 29, "tileID": 1, "contentID": 1 },
+    { "id": 34, "tileID": 1, "contentID": -1 },
+    { "id": 35, "tileID": 1, "contentID": -1 },
+    { "id": 36, "tileID": 1, "contentID": -1 }
+  ],
+  "grid_X": 6,
+  "grid_Y": 6,
+  "difficultyLevel": 0
+}

@@ -1,0 +1,23 @@
+{
+    "id": 13,
+    "gridData": [
+        { "id": 2, "tileID": 1, "contentID": -1 },
+        { "id": 3, "tileID": 3, "contentID": -1 },
+        { "id": 4, "tileID": 3, "contentID": -1 },
+        { "id": 6, "tileID": 1, "contentID": -1 },
+        { "id": 7, "tileID": 1, "contentID": -1 },
+        { "id": 8, "tileID": 1, "contentID": -1 },
+        { "id": 9, "tileID": 1, "contentID": -1 },
+        { "id": 10, "tileID": 1, "contentID": -1 },
+        { "id": 11, "tileID": 1, "contentID": 0 },
+        { "id": 12, "tileID": 1, "contentID": 0 },
+        { "id": 13, "tileID": 1, "contentID": -1 },
+        { "id": 15, "tileID": 1, "contentID": -1 },
+        { "id": 16, "tileID": 1, "contentID": 1 },
+        { "id": 17, "tileID": 1, "contentID": -1 }
+    ],
+    "grid_X": 4,
+    "grid_Y": 5,
+    "difficultyLevel": 2
+  }
+  
