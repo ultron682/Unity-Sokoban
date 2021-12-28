@@ -103,14 +103,12 @@ public class ThirdStageScript : MonoBehaviour {
     public void OnClick_NewGame() {
         MainContainer.SetActive(false);
         MainMenuCanvas.Instance.GameObject_Title.SetActive(false);
-        MainMenuCanvas.Instance.GameObject_TogglesStages.SetActive(false);
         Panel_CustomLevels.SetActive(true);
     }
 
     public void OnClick_Back() {
         MainContainer.SetActive(true);
         MainMenuCanvas.Instance.GameObject_Title.SetActive(true);
-        MainMenuCanvas.Instance.GameObject_TogglesStages.SetActive(true);
         Panel_CustomLevels.SetActive(false);
     }
 }

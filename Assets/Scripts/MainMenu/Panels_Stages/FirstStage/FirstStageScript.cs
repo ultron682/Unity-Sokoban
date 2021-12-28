@@ -20,7 +20,6 @@ public class FirstStageScript : MonoBehaviour {
         MainContainer.SetActive(false);
         Panel_DifficultyLevel.SetActive(true);
         MainMenuCanvas.Instance.GameObject_Title.SetActive(false);
-        MainMenuCanvas.Instance.GameObject_TogglesStages.SetActive(false);
     }
 
     public void OnClick_Exit() {
@@ -32,7 +31,6 @@ public class FirstStageScript : MonoBehaviour {
         MainContainer.SetActive(true);
         Panel_DifficultyLevel.SetActive(false);
         MainMenuCanvas.Instance.GameObject_Title.SetActive(true);
-        MainMenuCanvas.Instance.GameObject_TogglesStages.SetActive(true);
     }
 
     public void OnClick_PlayWithSelectedDifficultyLevel() {

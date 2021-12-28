@@ -3,12 +3,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class SecondStageScript : MonoBehaviour {
+public class MainPanelScript : MonoBehaviour {
     public GameObject MainContainer;
     public GameObject Panel_Campaign;
     public GameObject Panel_SetNick;
     public GameObject Rank_List;
-    public Button Button_LoadSavedGames;
+    //public Button Button_LoadSavedGames;
 
     public GameObject Prefab_RankingElement;
     public RectTransform RectTransform_RankingContent;
@@ -35,7 +35,7 @@ public class SecondStageScript : MonoBehaviour {
 
         LoadRanking();
 
-        Button_LoadSavedGames.interactable = (DataManager.Instance.Stage2_AllSavedLevelsData_Serializable.savedLevels_Serializables.Count > 0);
+        //Button_LoadSavedGames.interactable = (DataManager.Instance.Stage2_AllSavedLevelsData_Serializable.savedLevels_Serializables.Count > 0);
     }
 
     public void OnClick_Exit() {
@@ -45,7 +45,6 @@ public class SecondStageScript : MonoBehaviour {
     public void OnClick_Play() {
         MainContainer.SetActive(false);
         MainMenuCanvas.Instance.GameObject_Title.SetActive(false);
-        MainMenuCanvas.Instance.GameObject_TogglesStages.SetActive(false);
 
         if (PlayerPrefs.GetString("playerNick", string.Empty) == string.Empty) {
             Panel_SetNick.SetActive(true);
@@ -58,18 +57,16 @@ public class SecondStageScript : MonoBehaviour {
     public void OnClick_Back() {
         MainContainer.SetActive(true);
         MainMenuCanvas.Instance.GameObject_Title.SetActive(true);
-        MainMenuCanvas.Instance.GameObject_TogglesStages.SetActive(true);
     }
 
     public void OnClick_Load() {
         MainContainer.SetActive(false);
         MainMenuCanvas.Instance.GameObject_Title.SetActive(false);
-        MainMenuCanvas.Instance.GameObject_TogglesStages.SetActive(false);
+
     }
     public void OnClick_Ranking() {
         MainContainer.SetActive(false);
         MainMenuCanvas.Instance.GameObject_Title.SetActive(false);
-        MainMenuCanvas.Instance.GameObject_TogglesStages.SetActive(false);
 
         Rank_List.SetActive(true);
     }
