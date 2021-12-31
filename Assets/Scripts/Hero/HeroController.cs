@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class HeroController : MonoBehaviour {
     public Animator Animator_Hero;
@@ -13,6 +15,13 @@ public class HeroController : MonoBehaviour {
     Transform Transform_TargetTile;
 
     private TileScript TileScript_Current;
+
+
+    GraphicRaycaster m_Raycaster;
+    PointerEventData m_PointerEventData;
+    EventSystem m_EventSystem;
+    GameObject touchedControl = null;
+
 
     HeroStateAnimation HeroStateAnimation_Current {
         get {
@@ -42,6 +51,8 @@ public class HeroController : MonoBehaviour {
 
     void Start() {
         if (LevelLoader.Instance != null) {
+            m_Raycaster = LevelLoaderCanvasManager.Instance.GetComponent<GraphicRaycaster>();
+            m_EventSystem = LevelLoaderCanvasManager.Instance.GameObject_EventSystem.GetComponent<EventSystem>();
             paddingTile = LevelLoader.Instance.PaddingTile;
             LevelLoaderManager.Instance.OnEndLoadingLevel += Instance_OnEndLoadingLevel;
         }
@@ -50,29 +61,48 @@ public class HeroController : MonoBehaviour {
     void Update() {
         bool sendCommand = false;
 
-
-        if (IsSomeoneKeyDown() && LevelDataManager.Instance.GameIsEnd == false && Transform_TargetTile == null) {
+        if (Input.touchCount == 1 && LevelDataManager.Instance.GameIsEnd == false && Transform_TargetTile == null) {
             bool succes = false;
 
+            Touch finger = Input.GetTouch(0);
+            List<RaycastResult> touchedElements = GetUiElementFromTouchPosition(finger.position);
 
-            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
+            KeyCode pressedKeyCode = KeyCode.None;
+
+            foreach (RaycastResult result in touchedElements) {
+                if (result.gameObject.CompareTag("TriggerControl")) {
+                    touchedControl = result.gameObject.transform.parent.gameObject;
+                    print(touchedControl.name);
+                    if (touchedControl.name == "a")
+                        pressedKeyCode = KeyCode.A;
+                    else if (touchedControl.name == "w")
+                        pressedKeyCode = KeyCode.W;
+                    else if (touchedControl.name == "s")
+                        pressedKeyCode = KeyCode.S;
+                    else if (touchedControl.name == "d")
+                        pressedKeyCode = KeyCode.D;
+                }
+            }
+
+
+            if (pressedKeyCode == KeyCode.A || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) {
                 MoveTo(Direction.Idle_Back_Left, ref succes);
                 sendCommand = true;
             }
-            else if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
+            else if (pressedKeyCode == KeyCode.W || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) {
                 MoveTo(Direction.Idle_Back_Right, ref succes);
                 sendCommand = true;
             }
-            else if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
+            else if (pressedKeyCode == KeyCode.S || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S)) {
                 MoveTo(Direction.Idle_Forward_Left, ref succes);
                 sendCommand = true;
             }
-            else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
+            else if (pressedKeyCode == KeyCode.D || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) {
                 MoveTo(Direction.Idle_Forward_Right, ref succes);
                 sendCommand = true;
             }
 
-            if (IsSomeoneKeyDown() == true && succes == false) {
+            if (/*IsSomeoneKeyDown() == true && */succes == false) {
                 HeroStateAnimation_Current = HeroStateAnimation.Idle;
                 Animator_Hero.SetBool("isPushing", false);
             }
@@ -90,8 +120,7 @@ public class HeroController : MonoBehaviour {
             }
         }
         else {
-            if (IsSomeoneKeyDown() == false
-                && sendCommand == false) {
+            if (Input.touchCount == 0 && sendCommand == false) {
                 HeroStateAnimation_Current = HeroStateAnimation.Idle;
                 Animator_Hero.SetBool("isPushing", false);
             }
@@ -99,12 +128,22 @@ public class HeroController : MonoBehaviour {
 
     }
 
-    bool IsSomeoneKeyDown() {
-        return (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
-                 || (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
-                 || (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
-                 || (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D));
+    private List<RaycastResult> GetUiElementFromTouchPosition(Vector2 fingerPosition) {
+        List<RaycastResult> results = new List<RaycastResult>();
+        m_PointerEventData = new PointerEventData(m_EventSystem) {
+            position = fingerPosition
+        };
+        m_Raycaster.Raycast(m_PointerEventData, results);
+
+        return results;
     }
+
+    //bool IsSomeoneKeyDown() {
+    //    return (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+    //             || (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+    //             || (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+    //             || (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D));
+    //}
 
     private void Instance_OnEndLoadingLevel(object sender, EventArgs e) {
         Tile_Serializable tile_SerializableWithHero = LevelDataManager.Instance.levelData_Serializable.gridData.Find(p => p.contentID == ContentTile.Hero);

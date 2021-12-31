@@ -9,7 +9,7 @@ public class CustomLevelScript : MonoBehaviour, IPointerClickHandler {
 
 
     public void OnPointerClick(PointerEventData eventData) {
-        ThirdStageScript.Instance.SelectCustomLevelToLoad(this, levelData_Serializable, savedLevelData_Serializable);
+        Panel_CommunityScript.Instance.SelectCustomLevelToLoad(this, levelData_Serializable, savedLevelData_Serializable);
     }
 
     public void ChangeSelectionState(bool isSelected) {

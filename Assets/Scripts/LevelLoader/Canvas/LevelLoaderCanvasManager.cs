@@ -3,13 +3,20 @@ using UnityEngine.UI;
 
 
 public class LevelLoaderCanvasManager : MonoBehaviour {
+    public static LevelLoaderCanvasManager Instance;
+
     public GameObject Panel_MainContainer;
     public GameObject Panel_Menu;
     public GameObject Panel_Summary;
+    public GameObject GameObject_EventSystem;
     public Text Text_BoxInRightPlace;
     public Text Text_MovesCount;
     public AudioClip AudioClip_ChestEvent;
 
+
+    private void Awake() {
+        Instance = this;
+    }
 
     void Start() {
         Panel_MainContainer.SetActive(true);

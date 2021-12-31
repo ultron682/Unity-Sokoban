@@ -4,21 +4,17 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class ThirdStageScript : MonoBehaviour {
-    public static ThirdStageScript Instance;
+public class Panel_CommunityScript : MonoBehaviour {
+    public static Panel_CommunityScript Instance;
 
-    public GameObject MainContainer;
-    public GameObject Panel_CustomLevels;
     public GameObject Prefab_CustomLevel;
     public RectTransform RectTransform_CustomLevelsContent;
-    public Button Button_Continue;
-    public Button Button_NewGame;
+    public Button Button_Play;
     public Button Button_Remove;
 
     private List<CustomLevelScript> customLevelScripts = new List<CustomLevelScript>();
     private GameObject selectedGameObjectCustomLevel = null;
     private LevelData_Serializable selectedLevelData_SerializableToLoad;
-    private LevelData_Serializable savedSelectedLevelData_SerializableToLoad;
 
 
     private void Awake() {
@@ -26,8 +22,6 @@ public class ThirdStageScript : MonoBehaviour {
     }
 
     void Start() {
-        Panel_CustomLevels.SetActive(false);
-        MainContainer.SetActive(true);
         LoadLevels();
     }
 
@@ -50,10 +44,8 @@ public class ThirdStageScript : MonoBehaviour {
     public void SelectCustomLevelToLoad(CustomLevelScript customLevelScript, LevelData_Serializable selectedLevelData_SerializableToLoad, LevelData_Serializable savedSelectedLevelData_SerializableToLoad) {
         selectedGameObjectCustomLevel = customLevelScript.gameObject;
         this.selectedLevelData_SerializableToLoad = selectedLevelData_SerializableToLoad;
-        this.savedSelectedLevelData_SerializableToLoad = savedSelectedLevelData_SerializableToLoad;
 
-        Button_NewGame.interactable = true;
-        Button_Continue.interactable = (savedSelectedLevelData_SerializableToLoad != null);
+        Button_Play.interactable = true;
         Button_Remove.interactable = true;
 
         foreach (var element in customLevelScripts) {
@@ -65,14 +57,7 @@ public class ThirdStageScript : MonoBehaviour {
         customLevelScript.ChangeSelectionState(true);
     }
 
-    public void OnClick_Continue() {
-        LevelDataHolder levelDataHolder = FindObjectOfType<LevelDataHolder>();
-        levelDataHolder.LevelData_Serializable = savedSelectedLevelData_SerializableToLoad;
-
-        SceneManager.LoadScene((int)Scenes.LevelLoader);
-    }
-
-    public void OnClick_FromNew() {
+    public void OnClick_Play() {
         LevelDataHolder levelDataHolder = FindObjectOfType<LevelDataHolder>();
         levelDataHolder.LevelData_Serializable = selectedLevelData_SerializableToLoad;
 
@@ -81,7 +66,7 @@ public class ThirdStageScript : MonoBehaviour {
 
     public void OnClick_Remove() {
         Button_Remove.interactable = false;
-        Button_NewGame.interactable = false;
+        Button_Play.interactable = false;
 
         if (selectedGameObjectCustomLevel != null) {
             CreativeLevelsManager.Instance.customLevels_Serializable.levelData_Serializables.Remove(selectedLevelData_SerializableToLoad);
@@ -98,17 +83,5 @@ public class ThirdStageScript : MonoBehaviour {
 
     public void OnClick_Create() {
         SceneManager.LoadScene((int)Scenes.Creative);
-    }
-
-    public void OnClick_NewGame() {
-        MainContainer.SetActive(false);
-        MainMenuCanvas.Instance.GameObject_Title.SetActive(false);
-        Panel_CustomLevels.SetActive(true);
-    }
-
-    public void OnClick_Back() {
-        MainContainer.SetActive(true);
-        MainMenuCanvas.Instance.GameObject_Title.SetActive(true);
-        Panel_CustomLevels.SetActive(false);
     }
 }
