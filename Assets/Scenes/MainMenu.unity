@@ -1836,8 +1836,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1668816864}
-        m_TargetAssemblyTypeName: SecondStageScript, Assembly-CSharp
-        m_MethodName: OnClick_Play
+        m_TargetAssemblyTypeName: PanelsManagerScript, GameAssembly
+        m_MethodName: OnClick_Campaign
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
