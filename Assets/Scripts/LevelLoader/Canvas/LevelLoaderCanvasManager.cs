@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -24,11 +24,11 @@ public class LevelLoaderCanvasManager : MonoBehaviour {
         Panel_Summary.SetActive(false);
 
         TileBoxContainerCounter.Instance.On_BoxPlace_Change += OnBoxPlaceChange;
-        LevelDataManager.Instance.OnMovesCountChange += (movesCount) => { Text_MovesCount.text = "Iloœæ ruchów: " + movesCount.ToString(); };
+        LevelDataManager.Instance.OnMovesCountChange += (movesCount) => { Text_MovesCount.text = "IloÅ›Ä‡ ruchÃ³w: " + movesCount.ToString(); };
         TileBoxContainerCounter.Instance.Refresh();
 
         LevelLoaderManager.Instance.OnEndLoadingLevel += (s, e) => {
-            Panel_Summary.GetComponent<Panel_SummaryScript>().Text_Title.text = $"Ukoñczono poziom: {LevelDataManager.Instance.levelData_Serializable.id}";
+            Panel_Summary.GetComponent<Panel_SummaryScript>().Text_Title.text = $"UkoÅ„czono poziom: {LevelDataManager.Instance.levelData_Serializable.id}";
         };
     }
 
